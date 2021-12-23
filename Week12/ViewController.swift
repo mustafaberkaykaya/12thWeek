@@ -27,7 +27,6 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
             let viewController = TextViewController(with: text)
             myControllers.append(viewController)
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,9 +53,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
         guard let index = myControllers.firstIndex(of: viewController), index > 0 else {
             return nil
         }
-        
         let before = index - 1
-        
         return myControllers[before]
     }
     
@@ -65,11 +62,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
         guard let index = myControllers.firstIndex(of: viewController), index < (myControllers.count - 1) else {
             return nil
         }
-        
         let after = index + 1
-        
         return myControllers[after]
-        
     }
-    
 }

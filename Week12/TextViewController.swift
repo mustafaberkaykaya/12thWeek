@@ -10,8 +10,7 @@ import TinyConstraints
 
 class TextViewController: UIViewController {
 
-    let myText: String
-    
+    private let myText: String
     private let myTextView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
@@ -28,16 +27,13 @@ class TextViewController: UIViewController {
     
     // swiftlint:disable all
     required init?(coder: NSCoder) {
-        
         fatalError("init(coder:) has not been implemented")
-        
     }
     // swiftlint:enable all
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         view.addSubview(self.myTextView)
         myTextView.edgesToSuperview()
     }
