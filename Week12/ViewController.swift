@@ -16,21 +16,23 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let vc = UIViewController()
-        vc.view.backgroundColor = .red
-        myControllers.append(vc)
+        let pages: [String] = [
+            "Chapter 1",
+            "Chapter 2",
+            "Chapter 3",
+            "Chapter 4"
+        ]
         
-        let vc2 = UIViewController()
-        vc2.view.backgroundColor = .green
-        myControllers.append(vc2)
+        for text in pages {
+            let viewController = TextViewController(with: text)
+            myControllers.append(viewController)
+        }
         
-        
-       
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now()+2 , execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
             self.presentPageVC()
         })
     }
@@ -40,16 +42,16 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
             return
         }
         
-        let vc = UIPageViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
-        vc.delegate = self
-        vc.dataSource = self
-        vc.setViewControllers([first], direction: .forward, animated: true, completion: nil)
-        present(vc, animated: true, completion: nil)
+        let viewController = UIPageViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
+        viewController.delegate = self
+        viewController.dataSource = self
+        viewController.setViewControllers([first], direction: .forward, animated: true, completion: nil)
+        present(viewController, animated: true, completion: nil)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        guard let index = myControllers.firstIndex(of: viewController), index>0 else {
+        guard let index = myControllers.firstIndex(of: viewController), index > 0 else {
             return nil
         }
         
@@ -60,7 +62,7 @@ class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageVi
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        guard let index = myControllers.firstIndex(of: viewController), index<(myControllers.count-1) else {
+        guard let index = myControllers.firstIndex(of: viewController), index < (myControllers.count - 1) else {
             return nil
         }
         
